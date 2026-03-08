@@ -42,8 +42,7 @@ function CurrentLocation({
           {location.region ? `, ${location.region}` : ""}
         </span>
         <span className="lp-coords">
-          {parseFloat(location.latitude).toFixed(4)}° ·{" "}
-          {parseFloat(location.longitude).toFixed(4)}°
+          {location.latitude.toFixed(4)}° · {location.longitude.toFixed(4)}°
           <SourceBadge source={source} />
         </span>
       </div>

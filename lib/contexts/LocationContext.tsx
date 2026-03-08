@@ -47,6 +47,14 @@ function clearStoredOverride() {
   } catch {}
 }
 
+function sanitizeLocation(loc: AppLocation): AppLocation {
+  return {
+    ...loc,
+    latitude: parseFloat(String(loc.latitude)),
+    longitude: parseFloat(String(loc.longitude)),
+  };
+}
+
 const LocationContext = createContext<LocationContextFull | null>(null);
 
 export function LocationProvider({ children }: { children: ReactNode }) {
@@ -95,7 +103,9 @@ export function LocationProvider({ children }: { children: ReactNode }) {
     }
     console.log("Using IP location from appInfo:", appInfo?.ipLocation);
     return {
-      location: appInfo?.ipLocation ?? null,
+      location: appInfo?.ipLocation
+        ? sanitizeLocation(appInfo.ipLocation)
+        : null,
       source: "ip",
       isLoading: appInfoLoading,
       setLocation,

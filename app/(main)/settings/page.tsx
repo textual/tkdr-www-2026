@@ -160,7 +160,7 @@ function LocationPanel() {
           </span>
           <span className="location-coords">
             {location
-              ? `${parseFloat(location.latitude).toFixed(4)}° · ${parseFloat(location.longitude).toFixed(4)}° · ${location.country_code}`
+              ? `${location.latitude.toFixed(4)}° · ${location.longitude.toFixed(4)}° · ${location.country_code}`
               : "Location unavailable"}
             <span className="location-source-tag">IP</span>
           </span>
