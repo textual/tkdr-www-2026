@@ -55,13 +55,13 @@ function Row({
 
 // ─── Theme Selector ───────────────────────────────────────────────────────────
 
-function ThemeSelector({
-  value,
-  onChange,
-}: {
-  value?: Theme;
-  onChange: (t: Theme) => void;
-}) {
+function isTheme(value: string | undefined): value is Theme {
+  return value === "dark" || value === "light" || value === "system";
+}
+
+function ThemeSelector() {
+  const { theme: rawTheme, setTheme } = useTheme();
+  const theme = isTheme(rawTheme) ? rawTheme : "system";
   const options: { value: Theme; label: string; icon: string }[] = [
     { value: "dark", label: "Dark", icon: "◐" },
     { value: "light", label: "Light", icon: "○" },
@@ -73,13 +73,13 @@ function ThemeSelector({
       {options.map((opt) => (
         <button
           key={opt.value}
-          className={`theme-btn${value === opt.value ? " active" : ""}`}
-          onClick={() => onChange(opt.value)}
+          className={`theme-btn${theme === opt.value ? " active" : ""}`}
+          onClick={() => setTheme(opt.value)}
         >
           {/* <span className="theme-icon">{opt.icon}</span>
           <span className="theme-label">{opt.label}</span> */}
           {opt.label}
-          {value === opt.value && <span className="theme-active-bar" />}
+          {theme === opt.value && <span className="theme-active-bar" />}
         </button>
       ))}
     </div>
