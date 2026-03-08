@@ -716,7 +716,7 @@ export default function SettingsPage() {
               label="Theme"
               description="Controls the colour scheme across the app"
             >
-              <ThemeSelector value={theme} onChange={setTheme} />
+              <ThemeSelector />
             </Row>
             <Row
               label="Theme"
