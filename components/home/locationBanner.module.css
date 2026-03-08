@@ -1,0 +1,21 @@
+.location-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-brand);
+  box-shadow: 0 0 5px var(--color-brand-glow);
+  display: block;
+  /* flex-shrink: 0; */
+  /* margin-right: 0.5rem; */
+  animation: loc-ping 2.5s ease-in-out infinite;
+}
+
+@keyframes loc-ping {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}

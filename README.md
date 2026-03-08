@@ -14,6 +14,9 @@ pnpm dev
 bun dev
 ```
 
+api local server: http://localhost:3006
+api dev server: https://tkdr-api-2026-3ab4420066b5.herokuapp.com
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
