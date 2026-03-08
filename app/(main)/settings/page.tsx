@@ -59,7 +59,7 @@ function ThemeSelector({
   value,
   onChange,
 }: {
-  value: Theme;
+  value?: Theme;
   onChange: (t: Theme) => void;
 }) {
   const options: { value: Theme; label: string; icon: string }[] = [
