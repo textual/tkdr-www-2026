@@ -8,6 +8,7 @@ import { TrackCard, type Track } from "@/components/tracks/TrackCard";
 import { useLocation } from "@/lib/contexts/LocationContext";
 import { useAppInfoContext } from "@/lib/contexts/AppInfoContext";
 import { useTracksNearby } from "@/lib/queries/useTracks";
+// import type { Track } from "@/types";
 
 // ─── Query ────────────────────────────────────────────────────────────────────
 
@@ -310,7 +311,7 @@ export default function TracksPage() {
             className="tracks-list"
             style={{ listStyle: "none", padding: 0, margin: 0 }}
           >
-            {tracks.map((track) => (
+            {tracks.map((track: Track) => (
               <li key={track.id}>
                 <TrackCard
                   track={track}

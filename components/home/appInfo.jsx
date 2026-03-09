@@ -14,7 +14,7 @@ const AppInfoComponent = () => {
   return (
     <div>
       <div>AppInfoComponent</div>
-      {Object.entries(appInfo).map(([key, value]) => (
+      {Object.entries(appInfo.data).map(([key, value]) => (
         <div key={key}>
           {valueObjs.includes(key) ? (
             <div className="border border-red-500 p-6 rounded-lg">

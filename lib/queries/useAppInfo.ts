@@ -27,7 +27,7 @@ export function useAppInfo() {
   });
 
   return {
-    appInfo: query.data?.data ?? null,
+    appInfo: query.data ?? null,
     isLoading: query.isLoading,
     // failureCount > 0 means at least one retry has happened —
     // useful for showing a "server is waking up…" message

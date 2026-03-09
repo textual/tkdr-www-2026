@@ -9,8 +9,14 @@ import { useAppInfoContext } from "@/lib/contexts/AppInfoContext";
 import { useLocation } from "@/lib/contexts/LocationContext";
 import styles from "./locationBanner.module.css";
 
-export function LocationBanner({ mode }) {
-  const { isLoading, isRetrying, error, appInfo } = useAppInfoContext();
+type LocationBannerMode = "default" | "sidebar" | "raw";
+
+interface LocationBannerProps {
+  mode?: LocationBannerMode;
+}
+
+export function LocationBanner({ mode = "default" }: LocationBannerProps) {
+  const { isLoading, isRetrying, error } = useAppInfoContext();
   const { location, source } = useLocation();
 
   if (isRetrying) {
