@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { AppInfo } from "@/types";
+import type { ApiResponse, AppInfo } from "@/types";
 
 import { apiClient } from "../apiClient";
 import { APP_INFO_PATH } from "@/lib/constants";
@@ -12,7 +12,7 @@ async function fetchAppInfo(): Promise<AppInfo> {
     // Throw so React Query knows to retry
     throw new Error(`app/info responded with ${res.status}`);
   }
-  return res.data;
+  return res.data.data;
 }
 
 /**
