@@ -5,10 +5,14 @@ import { useAppInfoContext } from "@/lib/contexts/AppInfoContext";
 import React from "react";
 
 const AppInfoComponent = () => {
-  const { isLoading, isRetrying, appInfo } = useAppInfoContext();
+  const { isLoading, isRetrying, appInfo, error } = useAppInfoContext();
   if (isLoading || isRetrying) {
     return <div>Loading app info...</div>;
   }
+  if (error) {
+    return <div>Error loading app info: {error.message}</div>;
+  }
+
   const valueObjs = ["IMAGE_SERVER", "ipLocation", "minAppVersion"];
 
   return (

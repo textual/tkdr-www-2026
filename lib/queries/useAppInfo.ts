@@ -7,7 +7,9 @@ import { APP_INFO_PATH } from "@/lib/constants";
 const APP_INFO_KEY = ["app", "info"] as const;
 
 async function fetchAppInfo(): Promise<AppInfo> {
+  console.log("Fetching app info from server...", APP_INFO_PATH);
   const res = await apiClient.uGet(APP_INFO_PATH);
+  console.log("app info result...", res);
   if (!res.ok) {
     // Throw so React Query knows to retry
     throw new Error(`app/info responded with ${res.status}`);

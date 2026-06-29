@@ -3,6 +3,7 @@
 // components/tracks/TrackCard.tsx
 
 import { Badge } from "@/components/ui/Badge";
+import { type Facility } from "@/types";
 
 export interface Track {
   id: number;
@@ -33,7 +34,7 @@ export interface Track {
 }
 
 interface TrackCardProps {
-  track: Track;
+  track: Facility;
   onClick?: (track: Track) => void;
 }
 
@@ -235,17 +236,25 @@ export function TrackCard({ track, onClick }: TrackCardProps) {
           <span className="tc-name">{displayName}</span>
           <span className="tc-location">{city}</span>
           <div className="tc-tags">
-            {track.recordtypename && (
+            {/* {track.recordtypename && (
               <Badge label={track.recordtypename} variant="muted" />
-            )}
+            )} */}
+            {track.tracks &&
+              track.tracks.map((circuit) => (
+                <Badge
+                  key={circuit.id}
+                  label={circuit.track_type}
+                  variant="muted"
+                />
+              ))}
           </div>
         </div>
 
         {/* Right — distance + chevron */}
         <div className="tc-right">
-          {track.distanceKm !== undefined && (
+          {track.distance_meters !== undefined && (
             <span className="tc-distance">
-              {track.distanceKm.toFixed(0)}
+              {track.distance_meters.toFixed(0)}
               <span className="tc-distance-unit">km</span>
             </span>
           )}

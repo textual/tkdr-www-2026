@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useAppInfoContext } from "@/lib/contexts/AppInfoContext";
-import { useLocation } from "@/lib/contexts/LocationContext";
+// import { useLocation } from "@/lib/contexts/LocationContext";
 import {
   useEvents,
   DEFAULT_RADIUS,
@@ -14,7 +14,7 @@ const RADIUS_OPTIONS = [50, 100, 250, 500, 1000];
 
 const EventsList = () => {
   const { isLoading: appInfoLoading, isRetrying } = useAppInfoContext();
-  const { location } = useLocation();
+  // const { location } = useLocation();
 
   const [radius, setRadius] = useState(DEFAULT_RADIUS);
   const { data, isLoading, isFetching, error } = useEvents(radius);

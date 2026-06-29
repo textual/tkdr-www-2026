@@ -1,6 +1,6 @@
 "use client";
 
-// app/tracks/page.tsx
+import { useState } from "react";
 
 // import { useQuery } from "@tanstack/react-query";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -9,6 +9,10 @@ import { useLocation } from "@/lib/contexts/LocationContext";
 import { useAppInfoContext } from "@/lib/contexts/AppInfoContext";
 import { useTracksNearby } from "@/lib/queries/useTracks";
 // import type { Track } from "@/types";
+
+import { useTrackFilters } from "@/lib/hooks/useTrackFilters";
+import { TrackFilterSheet } from "@/components/filters/TrackFilterSheet";
+import { FilterTrigger } from "@/components/filters/FilterPrimitives";
 
 // ─── Query ────────────────────────────────────────────────────────────────────
 
@@ -67,15 +71,24 @@ function TrackSkeleton() {
 export default function TracksPage() {
   const { isLoading: appLoading, isRetrying } = useAppInfoContext();
   const { location } = useLocation();
-  const { data, isLoading, isFetching, error } = useTracksNearby();
+  const filters = useTrackFilters();
+
+  const { data, isLoading, isFetching, error } = useTracksNearby({
+    radius: filters.applied.radiusKm,
+    trackType: filters.applied.facilityTypes,
+  });
   const isBooting = appLoading || (!location && isLoading);
 
+  const [filterOpen, setFilterOpen] = useState(false);
+
   if (isLoading) {
-    return <div>Loading events...</div>;
+    return <div>Loading tracks...</div>;
   }
 
   const { tracks, totalResults } = data || {};
   console.log("Tracks query state:", { data, isLoading, isFetching, error });
+  console.log("Tracks filter state:", filters);
+
   // console.log("Tracks data state:", tracks, totalResults);
   // const tracks = [];
   return (
@@ -278,11 +291,24 @@ export default function TracksPage() {
           )}
         </p>
 
-        <SectionHeader
-          index="01"
-          label="Circuits &amp; Facilities"
-          count={!isLoading ? tracks?.length : undefined}
-        />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginBottom: 16,
+          }}
+        >
+          <SectionHeader
+            index="01"
+            label="Circuits &amp; Facilities"
+            count={!isLoading ? tracks?.length : undefined}
+          />
+          <FilterTrigger
+            onClick={() => setFilterOpen(true)}
+            activeCount={filters.activeCount}
+          />
+        </div>
 
         {/* Loading — show skeletons */}
         {isBooting || isLoading ? (
@@ -327,6 +353,11 @@ export default function TracksPage() {
           <EmptyState radiusKm={250} />
         )}
       </div>
+      <TrackFilterSheet
+        open={filterOpen}
+        onOpenChange={setFilterOpen}
+        filters={filters}
+      />
     </>
   );
 }
