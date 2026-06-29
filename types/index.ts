@@ -59,29 +59,3 @@ export interface StoredOverride {
 
 export * from "./facility";
 export * from "./filters";
-
-export interface Track {
-  id: number;
-  name: string;
-  common_name__c: string;
-  abbreviated_name__c: string;
-  slug__c: string;
-  billingcity: string;
-  billingstate: string;
-  billingcountry: string;
-  billingstreet: string;
-  billinglatitude: number;
-  billinglongitude: number;
-  billingpostalcode: string | null;
-  description: string;
-  image_url__c: string;
-  logo_url__c: string;
-  logo_authorized__c: boolean;
-  logo_background_color__c: string | null;
-  rating_average__c: number | null;
-  rating_total__c: string;
-  recordtypename: string;
-  website: string | null;
-  phone: string | null;
-  distanceKm?: number; // injected client-side after distance calculation
-}

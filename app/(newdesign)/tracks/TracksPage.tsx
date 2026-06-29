@@ -4,7 +4,8 @@ import { useState } from "react";
 
 // import { useQuery } from "@tanstack/react-query";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { TrackCard, type Track } from "@/components/tracks/TrackCard";
+import { TrackCard } from "@/components/tracks/TrackCard";
+import { type Facility } from "@/types";
 import { useLocation } from "@/lib/contexts/LocationContext";
 import { useAppInfoContext } from "@/lib/contexts/AppInfoContext";
 import { useTracksNearby } from "@/lib/queries/useTracks";
@@ -337,7 +338,7 @@ export default function TracksPage() {
             className="tracks-list"
             style={{ listStyle: "none", padding: 0, margin: 0 }}
           >
-            {tracks.map((track: Track) => (
+            {tracks.map((track: Facility) => (
               <li key={track.id}>
                 <TrackCard
                   track={track}

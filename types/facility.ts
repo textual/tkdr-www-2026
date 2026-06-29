@@ -1,6 +1,6 @@
 // types/tracks.ts
 
-export interface Circuit {
+export interface Track {
   id: number;
   name: string;
   track_type: string; // "Road Course" | "Kart Circuit" | "Drag Strip" etc.
@@ -35,5 +35,5 @@ export interface Facility {
   distance_meters: number;
   distance_miles: string;
   /** Nested circuits at this facility */
-  tracks: Circuit[];
+  tracks: Track[];
 }

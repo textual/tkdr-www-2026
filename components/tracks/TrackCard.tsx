@@ -5,37 +5,9 @@
 import { Badge } from "@/components/ui/Badge";
 import { type Facility } from "@/types";
 
-export interface Track {
-  id: number;
-  sfid: string;
-  name: string;
-  common_name__c: string;
-  abbreviated_name__c: string;
-  slug__c: string;
-  billingcity: string;
-  billingstate: string;
-  billingcountry: string;
-  billingstreet: string;
-  billinglatitude: number;
-  billinglongitude: number;
-  billingpostalcode: string | null;
-  description: string;
-  image_url__c: string;
-  logo_url__c: string;
-  logo_authorized__c: boolean;
-  logo_background_color__c: string | null;
-  rating_average__c: number | null;
-  rating_total__c: string;
-  recordtypename: string;
-  website: string | null;
-  phone: string | null;
-  /** Injected client-side after query — km from user */
-  distanceKm?: number;
-}
-
 interface TrackCardProps {
   track: Facility;
-  onClick?: (track: Track) => void;
+  onClick?: (track: Facility) => void;
 }
 
 /** Fallback when no logo is available — shows initials */
@@ -45,7 +17,7 @@ function TrackLogo({
   bgColor,
 }: {
   name: string;
-  logoUrl: string;
+  logoUrl: string | null;
   bgColor: string | null;
 }) {
   const initials = name
