@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 // import { useQuery } from "@tanstack/react-query";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -70,6 +71,7 @@ function TrackSkeleton() {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function TracksPage() {
+  const router = useRouter();
   const { isLoading: appLoading, isRetrying } = useAppInfoContext();
   const { location } = useLocation();
   const filters = useTrackFilters();
@@ -343,8 +345,9 @@ export default function TracksPage() {
                 <TrackCard
                   track={track}
                   onClick={(t) => {
-                    // Navigate to track detail — wire to router.push(`/tracks/${t.slug__c}`)
-                    console.log("selected track:", t.slug__c);
+                    // A track/facility IS an account (recordtype "Facility"),
+                    // so its facility id/slug is the account id/slug.
+                    router.push(`/accounts/${t.slug__c}`);
                   }}
                 />
               </li>
