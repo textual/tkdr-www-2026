@@ -17,8 +17,16 @@ export function ProductsPanel({ accountId }: { accountId: number }) {
     <ul className="acct-list" style={{ listStyle: "none", padding: 0, margin: 0 }}>
       {data.map((product: AccountProduct) => (
         <li key={product.id} className="acct-list-row">
-          <span className="acct-list-name">{product.name}</span>
-          <Badge label={product.category} variant="muted" />
+          <div>
+            <div className="acct-list-name">{product.name}</div>
+            {product.description && (
+              <div className="acct-list-sub">{product.description}</div>
+            )}
+          </div>
+          <div style={{ display: "flex", gap: 6 }}>
+            {product.premium__c && <Badge label="Premium" variant="brand" />}
+            <Badge label={product.category} variant="muted" />
+          </div>
         </li>
       ))}
       <style>{`
@@ -33,6 +41,7 @@ export function ProductsPanel({ accountId }: { accountId: number }) {
         }
         .acct-list-row:last-child { border-bottom: none; }
         .acct-list-name { font-weight: 500; color: hsl(var(--foreground)); }
+        .acct-list-sub { font-size: 0.7rem; color: hsl(var(--muted-foreground)); margin-top: 2px; }
       `}</style>
     </ul>
   );

@@ -32,6 +32,22 @@ export default function AccountPage() {
         @media (max-width: 480px) {
           .account-page { padding: 32px 16px; }
         }
+        .account-page-raw {
+          margin-top: 32px;
+          padding: 16px;
+          background: hsl(var(--muted));
+          border: 1px solid hsl(var(--border));
+          border-radius: var(--radius);
+          font-size: 0.7rem;
+          overflow-x: auto;
+        }
+        .account-page-raw summary {
+          cursor: pointer;
+          font-family: 'Chakra Petch', sans-serif;
+          font-size: 0.75rem;
+          color: hsl(var(--muted-foreground));
+        }
+        .account-page-raw pre { margin-top: 10px; }
       `}</style>
 
       <div className="account-page">
@@ -60,6 +76,11 @@ export default function AccountPage() {
             </AccountPanel>
           ))
         )}
+
+        <details className="account-page-raw">
+          <summary>Raw API response — GET /accounts/{params.slug}</summary>
+          <pre>{JSON.stringify(account, null, 2)}</pre>
+        </details>
       </div>
     </>
   );

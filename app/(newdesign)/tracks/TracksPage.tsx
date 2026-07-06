@@ -88,12 +88,9 @@ export default function TracksPage() {
     return <div>Loading tracks...</div>;
   }
 
-  const { tracks, totalResults } = data || {};
-  console.log("Tracks query state:", { data, isLoading, isFetching, error });
-  console.log("Tracks filter state:", filters);
-
-  // console.log("Tracks data state:", tracks, totalResults);
-  // const tracks = [];
+  // /tracks/nearby now returns a flat array (data: [...], meta: { total, ... }) —
+  // `data` here IS the array, not a { tracks, totalResults } envelope.
+  const tracks = data;
   return (
     <>
       <style>{`

@@ -11,6 +11,7 @@ const OFFERING_LABEL: Record<AccountOfferingKey, string> = {
   services: "Services",
   products: "Products",
   sponsorships: "Sponsorships",
+  sponsoring: "Sponsoring",
 };
 
 function AccountLogo({

@@ -45,7 +45,7 @@ const PRIMARY_OFFERING_BY_RECORD_TYPE: Record<string, AccountOfferingKey> = {
   Organizer: "events",
   Vendor: "services",
   Manufacturer: "products",
-  Sponsor: "sponsorships",
+  Sponsor: "sponsoring",
 };
 
 /**

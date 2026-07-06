@@ -5,6 +5,14 @@ import { PanelSkeleton, PanelEmpty, PanelError } from "../PanelStates";
 import { useAccountEvents } from "@/lib/queries/useAccountPanels";
 import { type AccountEvent } from "@/types";
 
+function formatEventDate(startDate: string) {
+  return new Date(startDate).toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
 export function EventsPanel({ accountId }: { accountId: number }) {
   const { data, isLoading, error } = useAccountEvents(accountId);
 
@@ -18,8 +26,11 @@ export function EventsPanel({ accountId }: { accountId: number }) {
       {data.map((event: AccountEvent) => (
         <li key={event.id} className="acct-list-row">
           <div>
-            <div className="acct-list-name">{event.name}</div>
-            <div className="acct-list-sub">{event.start_date}</div>
+            <div className="acct-list-name">{event.event_format}</div>
+            <div className="acct-list-sub">
+              {formatEventDate(event.start_date)} · {event.track.name} ·{" "}
+              {event.event_code}
+            </div>
           </div>
           <Badge label={event.status} variant="outline" />
         </li>

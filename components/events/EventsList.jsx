@@ -29,22 +29,47 @@ const EventsList = () => {
     return <div>Loading events...</div>;
   }
 
-  const { events, totalResults } = data;
+  // /events/nearby now returns a flat array (data: [...], meta: { total, ... })
+  // with the shared Event shape (event_format/start_date/organizer/facility refs) —
+  // `data` here IS the array, not a { events, totalResults } envelope.
+  const events = data;
   return (
     <div>
       <div>EventsList </div>
-      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
       {events?.map((event) => {
         return (
           <div
             key={event.id}
-            className="border border-gray-300 p-4 rounded-md m-2 mb-4"
+            className="border border-gray-300 p-4 rounded-md m-2 mb-4 flex gap-4"
           >
-            <h3 className="text-lg font-semibold">{event.title}</h3>
-            <p>Date:{new Date(event.date__c).toLocaleDateString()}</p>
-            <p>Organizer: {event.organizer__common_name__c}</p>
-            <p>Location: {event.facility__common_name__c}</p>
-            <p>Distance: {event.distance_km} km</p>
+            <div>
+              <h3 className="text-lg font-semibold">{event.event_format}</h3>
+              <p>Date: {new Date(event.start_date).toLocaleDateString()}</p>
+              <p className="flex items-center gap-2">
+                Organizer:
+                {event.organizer?.logo_url && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={event.organizer.logo_url}
+                    alt={event.organizer.name}
+                    className="w-5 h-5 object-contain"
+                  />
+                )}
+                {event.organizer?.name}
+              </p>
+              <p className="flex items-center gap-2">
+                Location:
+                {event.facility?.logo_url && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={event.facility.logo_url}
+                    alt={event.facility.name}
+                    className="w-5 h-5 object-contain"
+                  />
+                )}
+                {event.facility?.name}
+              </p>
+            </div>
           </div>
         );
       })}
