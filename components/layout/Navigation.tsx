@@ -11,8 +11,9 @@ import {
 } from "@/components/ui/sheet";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import Logo from "./Logo";
-import styles from "./Navigation.module.css";
 import { LocationBanner } from "../home/locationBanner";
+import { SearchInput } from "@/components/search/SearchInput";
+import { SETTINGS_URL } from "@/lib/constants";
 
 // ─── Nav items ────────────────────────────────────────────────────────────────
 
@@ -186,14 +187,20 @@ function SidebarBody({
         <Logo />
       </div>
 
-      {/* Location pill */}
-      <div className={styles["sidebar-location"]}>
+      {/* Location — full-width bar, links to Settings to change location */}
+      <Link
+        href={SETTINGS_URL}
+        onClick={onNavigate}
+        className="sidebar-location"
+      >
         <LocationBanner mode="sidebar" />
+      </Link>
+
+      {/* Search */}
+      <div className="sidebar-search">
+        <SearchInput onSearch={onNavigate} className="sidebar-search-input" />
       </div>
-      <div className="p-4">
-        <span className={styles["location-dot"]} />
-        <LocationBanner mode="sidebar" />
-      </div>
+
       <div className="sidebar-divider" />
 
       {/* Main nav */}
@@ -273,8 +280,8 @@ export default function Navigation() {
             position: sticky;
             top: 0;
             height: 100vh;
-            background: hsl(var(--sidebar));
-            border-right: 1px solid hsl(var(--sidebar-border));
+            background: var(--sidebar);
+            border-right: 1px solid var(--sidebar-border);
             z-index: 40;
           }
         }
@@ -290,8 +297,8 @@ export default function Navigation() {
           // justify-content: space-between;
           gap:1rem;
           padding: 1rem;
-          background: hsl(var(--sidebar));
-          border-bottom: 1px solid hsl(var(--sidebar-border));
+          background: var(--sidebar);
+          border-bottom: 1px solid var(--sidebar-border);
           /* sticky so it stays at top while scrolling */
           position: sticky;
           top: 0;
@@ -333,7 +340,7 @@ export default function Navigation() {
           font-size: 1rem;
           font-weight: 600;
           letter-spacing: 0.18em;
-          color: hsl(var(--sidebar-foreground));
+          color: var(--sidebar-foreground);
         }
 
         .logo-accent {
@@ -346,9 +353,82 @@ export default function Navigation() {
 
         
 
+        /* ─── Location — full-width solid bar (matches (main) SideBar's
+           location treatment), not an inset pill ─── */
+        .sidebar-location {
+          display: block;
+          padding: 16px 18px;
+          margin-bottom: 14px;
+          background: var(--color-location-primary);
+          text-decoration: none;
+          transition: background 0.15s ease;
+        }
+
+        .sidebar-location:hover {
+          background: var(--color-brand-80);
+        }
+
+        .sidebar-search {
+          padding: 0 18px 14px;
+        }
+
+        .sidebar-search-input {
+          width: 100%;
+          padding: 5px 10px;
+          background: var(--sidebar-accent);
+          border: 1px solid var(--sidebar-border);
+          border-radius: 3px;
+          font-family: 'Chakra Petch', sans-serif;
+          font-size: 0.78rem;
+          letter-spacing: 0.03em;
+          color: var(--sidebar-foreground);
+          transition: border-color 0.15s ease, background 0.15s ease;
+        }
+
+        .sidebar-search-input:focus-visible {
+          border-color: var(--nav-brand);
+        }
+
+        /* ─── Hamburger ──────────────────────────── */
+        .hamburger {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 4.5px;
+          width: 34px;
+          height: 34px;
+          background: none;
+          border: 1px solid var(--sidebar-border);
+          border-radius: 4px;
+          padding: 0 8px;
+          cursor: pointer;
+          flex-shrink: 0;
+        }
+
+        .hamburger span {
+          display: block;
+          width: 100%;
+          height: 1.5px;
+          background: var(--sidebar-foreground);
+          border-radius: 1px;
+          transition: transform 0.22s ease, opacity 0.22s ease;
+          transform-origin: center;
+        }
+
+        .hamburger--open span:nth-child(1) {
+          transform: translateY(6px) rotate(45deg);
+        }
+        .hamburger--open span:nth-child(2) {
+          opacity: 0;
+          transform: scaleX(0);
+        }
+        .hamburger--open span:nth-child(3) {
+          transform: translateY(-6px) rotate(-45deg);
+        }
+
         .sidebar-divider {
           height: 1px;
-          background: hsl(var(--sidebar-border));
+          background: var(--sidebar-border);
           margin-bottom: 10px;
           flex-shrink: 0;
         }
@@ -375,7 +455,7 @@ export default function Navigation() {
           padding: 9px 12px;
           border-radius: 4px;
           text-decoration: none;
-          color: hsl(var(--sidebar-foreground));
+          color: var(--sidebar-foreground);
           opacity: 0.4;
           font-size: 0.78rem;
           font-weight: 500;
@@ -476,8 +556,8 @@ export default function Navigation() {
         */
         [data-radix-dialog-content].sheet-nav {
           padding: 0 !important;
-          background: hsl(var(--sidebar)) !important;
-          border-right: 1px solid hsl(var(--sidebar-border)) !important;
+          background: var(--sidebar) !important;
+          border-right: 1px solid var(--sidebar-border) !important;
           width: var(--nav-width) !important;
           max-width: var(--nav-width) !important;
           font-family: 'Chakra Petch', sans-serif;
@@ -494,7 +574,7 @@ export default function Navigation() {
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
             <button
-              className={`${styles.hamburger} ${open ? styles["hamburger--open"] : ""}`}
+              className={`hamburger${open ? " hamburger--open" : ""}`}
               aria-label="Open navigation"
             >
               <span />

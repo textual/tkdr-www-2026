@@ -43,7 +43,7 @@ export function LocationBanner({ mode = "default" }: LocationBannerProps) {
 
   if (mode === "sidebar") {
     return (
-      <div className="text-[0.65rem] text-muted-foreground flex items-center gap-1.5">
+      <div className="text-[0.65rem] text-brand-foreground flex items-center gap-1.5">
         <span className={styles["location-dot"]} />
         <span>
           {location.city}, {location.region}

@@ -3,6 +3,7 @@
 // components/tracks/TrackCard.tsx
 
 import { Badge } from "@/components/ui/Badge";
+import { logoBackgroundColor } from "@/lib/logoColor";
 import { type Facility } from "@/types";
 
 interface TrackCardProps {
@@ -32,7 +33,7 @@ function TrackLogo({
     return (
       <div
         className="tc-logo-wrap"
-        style={{ background: bgColor ?? "hsl(var(--muted))" }}
+        style={{ background: logoBackgroundColor(bgColor) ?? "hsl(var(--muted))" }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={logoUrl} alt={`${name} logo`} className="tc-logo-img" />
