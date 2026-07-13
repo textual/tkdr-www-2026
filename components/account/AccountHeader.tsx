@@ -3,6 +3,7 @@
 // components/account/AccountHeader.tsx
 
 import { Badge } from "@/components/ui/Badge";
+import { logoBackgroundColor } from "@/lib/logoColor";
 import { type AccountSummary, type AccountOfferingKey } from "@/types";
 
 const OFFERING_LABEL: Record<AccountOfferingKey, string> = {
@@ -35,7 +36,7 @@ function AccountLogo({
     return (
       <div
         className="ah-logo-wrap"
-        style={{ background: bgColor ?? "hsl(var(--muted))" }}
+        style={{ background: logoBackgroundColor(bgColor) ?? "hsl(var(--muted))" }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={logoUrl} alt={`${name} logo`} className="ah-logo-img" />

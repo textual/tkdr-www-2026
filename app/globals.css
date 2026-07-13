@@ -51,6 +51,26 @@
   --color-layout-background: var(--layout-background);
   --color-footer: var(--footer);
   --color-footer-accent: var(--footer-accent);
+
+  /*
+   * Percent-graded scales, derived via color-mix() from a single base
+   * token instead of hand-picked oklch/rgba literals. Since they read
+   * from mode-aware base vars (--color-brand, --foreground), they don't
+   * need their own :root/.dark overrides — only the base does.
+   */
+  --color-brand-10: color-mix(in oklch, var(--color-brand) 10%, transparent);
+  --color-brand-20: color-mix(in oklch, var(--color-brand) 20%, transparent);
+  --color-brand-40: color-mix(in oklch, var(--color-brand) 40%, transparent);
+  --color-brand-60: color-mix(in oklch, var(--color-brand) 60%, transparent);
+  --color-brand-80: color-mix(in oklch, var(--color-brand) 80%, transparent);
+
+  --color-ink-10: color-mix(in oklch, var(--foreground) 10%, transparent);
+  --color-ink-20: color-mix(in oklch, var(--foreground) 20%, transparent);
+  --color-ink-40: color-mix(in oklch, var(--foreground) 40%, transparent);
+  --color-ink-60: color-mix(in oklch, var(--foreground) 60%, transparent);
+  --color-ink-80: color-mix(in oklch, var(--foreground) 80%, transparent);
+
+  --color-location-primary: var(--location-primary);
 }
 
 :root {
@@ -87,6 +107,7 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --location-primary: var(--color-brand);
 }
 
 .dark {
@@ -122,6 +143,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --location-primary: var(--color-brand-60);
 }
 
 @layer base {

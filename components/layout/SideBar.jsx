@@ -23,6 +23,7 @@ import Logo from "@/components/layout/Logo";
 import { HOME_URL, SETTINGS_URL } from "@/lib/constants";
 import { usePathname } from "next/navigation";
 import { LocationBanner } from "../home/locationBanner";
+import { SearchInput } from "@/components/search/SearchInput";
 
 const NavItemWrapper = ({ isMobile, children }) => {
   if (isMobile) {
@@ -31,7 +32,7 @@ const NavItemWrapper = ({ isMobile, children }) => {
   return <>{children}</>;
 };
 
-const SidebarContent = ({ pathname, isMobile = false }) => {
+const SidebarContent = ({ pathname, isMobile = false, onSearch }) => {
   const menuItems = [
     { name: "Home", href: HOME_URL, icon: House },
     { name: "Tracks", href: "/tracks", icon: MapPinned },
@@ -45,6 +46,13 @@ const SidebarContent = ({ pathname, isMobile = false }) => {
     <nav className="flex flex-col z-100">
       <div className="p-4 bg-sidebar-accent border-sidebar-border">
         <LocationBanner mode="sidebar" />
+      </div>
+
+      <div className="p-4 pb-2">
+        <SearchInput
+          className="bg-secondary text-secondary-foreground"
+          onSearch={onSearch}
+        />
       </div>
 
       {menuItems.map((item) => {
@@ -92,7 +100,11 @@ export default function SideBar({ children }) {
               <SheetTitle className="mb-4">
                 <Logo />
               </SheetTitle>
-              <SidebarContent pathname={pathname} isMobile={true} />
+              <SidebarContent
+                pathname={pathname}
+                isMobile={true}
+                onSearch={() => setOpen(false)}
+              />
             </SheetContent>
           </Sheet>
           <Logo />

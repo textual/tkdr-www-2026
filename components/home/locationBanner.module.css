@@ -2,7 +2,7 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--color-brand);
+  background: var(--color-brand-foreground);
   box-shadow: 0 0 5px var(--color-brand-glow);
   display: block;
   /* flex-shrink: 0; */
