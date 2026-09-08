@@ -3,7 +3,7 @@
 import { useState } from "react";
 // import { useLocation } from "@/contexts/LocationContext";
 import { useLocation } from "@/lib/contexts/LocationContext";
-import { ModeToggle } from "../../../components/layout/ModeToggle";
+import { ModeToggle } from "../../components/layout/ModeToggle";
 import { useTheme } from "next-themes";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
