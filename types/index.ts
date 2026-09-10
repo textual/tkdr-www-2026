@@ -61,3 +61,4 @@ export * from "./facility";
 export * from "./filters";
 export * from "./account";
 export * from "./search";
+export * from "./featureStatus";
