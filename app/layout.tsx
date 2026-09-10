@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { chakra, inter } from "@/lib/fonts";
-
-// import SideBar from "@/components/layout/SideBar";
 import { Providers } from "@/lib/contexts/providers";
-// import Navigation from "@/components/layout/Navigation";
+import Navigation from "@/components/layout/Navigation";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,10 +18,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${chakra.className} ${inter.variable} antialiased`}>
         <Providers>
-          {/* <SideBar>{children}</SideBar> */}
-          {/* <Navigation />
-          <main className="main-content bg-layout-background">{children}</main> */}
-          {children}
+          <div className="app-shell">
+            <Navigation />
+            <main className="app-main bg-layout-background">{children}</main>
+          </div>
         </Providers>
       </body>
     </html>
